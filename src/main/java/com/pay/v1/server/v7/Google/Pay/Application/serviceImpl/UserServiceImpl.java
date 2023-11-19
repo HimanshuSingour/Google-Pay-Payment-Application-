@@ -9,6 +9,8 @@ import com.pay.v1.server.v7.Google.Pay.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import static com.pay.v1.server.v7.Google.Pay.Application.constant.UserConstants.*;
@@ -24,7 +26,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRegistrationResponse userRegistration(UserRegistrationRequest userRegistrationRequest) {
 
-        if (userRegistrationRequest.getAddress().isBlank() || userRegistrationRequest.getAge().isBlank() || userRegistrationRequest.getCity().isBlank()) {
+        List<String> requiredFields = Arrays.asList(userRegistrationRequest.getAddress(), userRegistrationRequest.getAge(),
+                userRegistrationRequest.getCity(), userRegistrationRequest.getEmail(), userRegistrationRequest.getLastName(),
+                userRegistrationRequest.getFirstName(), userRegistrationRequest.getCountry(), userRegistrationRequest.getPhoneNumber()
+        );
+
+        if (requiredFields.stream().anyMatch(String::isBlank)) {
             throw new UserServiceExceptionSteps(ALL_FIELD_REQUIRED);
         }
 
