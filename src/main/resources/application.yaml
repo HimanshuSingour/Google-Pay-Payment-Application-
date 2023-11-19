@@ -1,0 +1,22 @@
+
+server:
+  port: 7070
+
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/PAY_APPLICATION
+    username: root
+    password: Pavilion@12
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
