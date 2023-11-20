@@ -16,21 +16,19 @@ import org.springframework.security.web.SecurityFilterChain;
 public class GlobalSecurity {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        httpSecurity
+        http
                 .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers("pay/v4/account/register")
+                .disable().authorizeHttpRequests()
+                .requestMatchers("/server/v4/register-user")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
 
-        return httpSecurity.build();
-
+        return http.build();
     }
 
     @Bean

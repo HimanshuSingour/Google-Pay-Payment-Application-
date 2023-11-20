@@ -10,10 +10,11 @@ import java.util.Collection;
 @Component
 public class CustomsUserDetails implements UserDetails {
 
-    private UserInformation userInformation;
+    private UserInformation information;
 
-    public CustomsUserDetails(UserInformation userInformation) {
-        this.userInformation = userInformation;
+    public CustomsUserDetails(UserInformation information) {
+        super();
+        this.information = information;
     }
 
     @Override
@@ -23,12 +24,12 @@ public class CustomsUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return userInformation.getPassword();
+        return information.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userInformation.getFirstName();
+        return information.getFirstName();
     }
 
     @Override

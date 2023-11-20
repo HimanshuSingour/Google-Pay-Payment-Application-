@@ -9,15 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("pay/v4")
+@RequestMapping("/server/v4")
 public class RegistrationController {
 
     @Autowired
     private UserService userService;
 
 
-    @PostMapping("/account/register")
-    ResponseEntity<UserRegistrationResponse> userRegistration(@RequestBody  UserRegistrationRequest userRegistrationRequest){
+    @PostMapping("/register-user")
+    ResponseEntity<UserRegistrationResponse> userRegistration(@RequestBody UserRegistrationRequest userRegistrationRequest){
         UserRegistrationResponse userRegistrationResponse = userService.userRegistration(userRegistrationRequest);
         return new ResponseEntity<UserRegistrationResponse>(userRegistrationResponse , HttpStatus.CREATED);
     }

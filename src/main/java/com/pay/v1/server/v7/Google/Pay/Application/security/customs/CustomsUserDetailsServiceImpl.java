@@ -8,12 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 import static com.pay.v1.server.v7.Google.Pay.Application.constant.UserConstants.DETAIL_NOT_FOUND;
 
-@Component
+@Service
 public class CustomsUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -21,10 +22,12 @@ public class CustomsUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        Optional<UserInformation> userInformation = userRepositories.findByFirstName(name);
-        if (userInformation.isPresent()) {
-            return new CustomsUserDetails(userInformation.get());
+        UserInformation userInformation = userRepositories.findByFirstName(name);
+        if (userInformation == null) {
+
+            throw new DetailsNotFoundExceptionSteps(DETAIL_NOT_FOUND);
         }
-        throw new DetailsNotFoundExceptionSteps(DETAIL_NOT_FOUND);
+        return new CustomsUserDetails(userInformation);
+
     }
 }
