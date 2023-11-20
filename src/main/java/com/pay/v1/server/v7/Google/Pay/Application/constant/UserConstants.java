@@ -8,4 +8,7 @@ public class UserConstants {
     public static final String ALL_FIELD_REQUIRED = "Completion of all fields is mandatory for submission, thank you";
     public static final String SUCCESSFULLY_REGISTERED = "Your account have been created successfully";
     public static final String SUCCESS_ONE = "SUCCESS";
+
+    public static final String DETAIL_NOT_FOUND = "You haven't registered your account yet.";
+
 }

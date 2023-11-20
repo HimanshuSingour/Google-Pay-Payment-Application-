@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     public UserRegistrationResponse userRegistration(UserRegistrationRequest userRegistrationRequest) {
 
         List<String> requiredFields = Arrays.asList(userRegistrationRequest.getAddress(), userRegistrationRequest.getAge(),
-                userRegistrationRequest.getCity(), userRegistrationRequest.getEmail(), userRegistrationRequest.getLastName(),
+                userRegistrationRequest.getCity(), userRegistrationRequest.getPassword(), userRegistrationRequest.getEmail(), userRegistrationRequest.getLastName(),
                 userRegistrationRequest.getFirstName(), userRegistrationRequest.getCountry(), userRegistrationRequest.getPhoneNumber()
         );
 
@@ -42,8 +42,10 @@ public class UserServiceImpl implements UserService {
         List<UserInformation> existSameEmail = userRepositories.existByEmail(userRegistrationRequest.getEmail());
         List<UserInformation> existSamePhoneNumber = userRepositories.existByPhoneNumber(userRegistrationRequest.getPhoneNumber());
         {
-            if (!existSameEmail.isEmpty()) { throw new DuplicatesExceptionSteps(DUPLICATE_EMAIL_EXIST);
-            } else if (!existSamePhoneNumber.isEmpty()) { throw new DuplicatesExceptionSteps(DUPLICATE_PHONE_NUMBER_EXIST);
+            if (!existSameEmail.isEmpty()) {
+                throw new DuplicatesExceptionSteps(DUPLICATE_EMAIL_EXIST);
+            } else if (!existSamePhoneNumber.isEmpty()) {
+                throw new DuplicatesExceptionSteps(DUPLICATE_PHONE_NUMBER_EXIST);
             }
         }
 
@@ -57,6 +59,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userRegistrationRequest.getLastName())
                 .country(userRegistrationRequest.getCountry())
                 .city(userRegistrationRequest.getCity())
+                .password(userRegistrationRequest.getPassword())
                 .phoneNumber(userRegistrationRequest.getPhoneNumber())
                 .build();
 

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ import lombok.*;
 @Builder
 @Table(name = "USER_INFO")
 @Entity
+@Component
 public class UserInformation {
 
     @Id
@@ -31,6 +33,9 @@ public class UserInformation {
 
     @Column(name = "USER_AGE")
     private String age;
+
+    @Column(name = "USER_PASSWORD")
+    private String password;
 
     @Column(name = "USER_CITY")
     private String city;
