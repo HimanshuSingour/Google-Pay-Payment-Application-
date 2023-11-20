@@ -9,4 +9,5 @@ public class FieldsConstants {
     public static final String MSG_L_NAME_LENGTH_REQUIRED = "LastName should be between 4 to 9 characters";
 
     public static final String MSG_NUMERIC_VALUE_REQUIRED = "Should be only Numeric Value";
+    public static final String MSG_EMAIL_FORMATE_REQUIRED = "@gamil.com is required at the end";
 }

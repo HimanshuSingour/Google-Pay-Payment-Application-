@@ -1,5 +1,6 @@
 package com.pay.v1.server.v7.Google.Pay.Application.dtos;
 
+import com.pay.v1.server.v7.Google.Pay.Application.validations.EmailValueAnnotation;
 import com.pay.v1.server.v7.Google.Pay.Application.validations.NumericValueAnnotation;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Size;
@@ -27,6 +28,7 @@ public class UserRegistrationRequest {
     @NumericValueAnnotation(message = MSG_NUMERIC_VALUE_REQUIRED)
     private String phoneNumber;
 
+    @EmailValueAnnotation(message = MSG_EMAIL_FORMATE_REQUIRED)
     private String email;
     private String city;
     private String country;
