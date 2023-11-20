@@ -1,19 +1,19 @@
 package com.pay.v1.server.v7.Google.Pay.Application.serviceImpl;
 
+import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailRequest;
+import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailResponse;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationRequest;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationResponse;
 import com.pay.v1.server.v7.Google.Pay.Application.entity.UserInformation;
-import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DuplicatesExceptionSteps;
+import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DetailsNotFoundExceptionSteps;
+import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DuplicatesOccursExceptionSteps;
 import com.pay.v1.server.v7.Google.Pay.Application.exceptions.UserServiceExceptionSteps;
 import com.pay.v1.server.v7.Google.Pay.Application.repository.UserRepositories;
 import com.pay.v1.server.v7.Google.Pay.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static com.pay.v1.server.v7.Google.Pay.Application.constant.UserConstants.*;
 
@@ -41,9 +41,9 @@ public class UserServiceImpl implements UserService {
         List<UserInformation> existSamePhoneNumber = userRepositories.existByPhoneNumber(userRegistrationRequest.getPhoneNumber());
         {
             if (!existSameEmail.isEmpty()) {
-                throw new DuplicatesExceptionSteps(DUPLICATE_EMAIL_EXIST);
+                throw new DuplicatesOccursExceptionSteps(DUPLICATE_EMAIL_EXIST);
             } else if (!existSamePhoneNumber.isEmpty()) {
-                throw new DuplicatesExceptionSteps(DUPLICATE_PHONE_NUMBER_EXIST);
+                throw new DuplicatesOccursExceptionSteps(DUPLICATE_PHONE_NUMBER_EXIST);
             }
         }
 
@@ -76,5 +76,32 @@ public class UserServiceImpl implements UserService {
                 .phoneNumber(userInformation.getPhoneNumber())
                 .build();
 
+    }
+
+    @Override
+    public LoginDetailResponse getYourLoginDetails(LoginDetailRequest loginDetailRequest) {
+
+        List<String> requiredFields = Arrays.asList(loginDetailRequest.getEmail(), loginDetailRequest.getPhoneNumber());
+        if (requiredFields.stream().anyMatch(String::isBlank)) {
+            throw new UserServiceExceptionSteps(ALL_FIELD_REQUIRED);
+        }
+
+        LoginDetailResponse detailRequest = null;
+        Optional<UserInformation> information = userRepositories.findByPhoneNumber(loginDetailRequest.getPhoneNumber());
+        if (information.isPresent()) {
+            UserInformation getValue = information.get();
+
+            detailRequest = LoginDetailResponse.builder()
+                    .lastName(getValue.getLastName())
+                    .password(getValue.getPassword())
+                    .firstName(getValue.getFirstName())
+                    .status("ACCEPTED")
+                    .message(USER_LOGIN_INFO)
+                    .build();
+        } else {
+            throw new DetailsNotFoundExceptionSteps(DETAIL_NOT_FOUND);
+        }
+
+        return detailRequest;
     }
 }

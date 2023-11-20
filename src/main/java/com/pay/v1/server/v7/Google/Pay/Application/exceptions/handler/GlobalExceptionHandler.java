@@ -1,12 +1,12 @@
 package com.pay.v1.server.v7.Google.Pay.Application.exceptions.handler;
 
-import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DuplicatesExceptionSteps;
+import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DetailsNotFoundExceptionSteps;
+import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DuplicatesOccursExceptionSteps;
 import com.pay.v1.server.v7.Google.Pay.Application.exceptions.ResponseHandler.ErrorMessages;
 import com.pay.v1.server.v7.Google.Pay.Application.exceptions.UserServiceExceptionSteps;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -31,12 +31,23 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorMessages>(errorMessages, HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @ExceptionHandler(DuplicatesExceptionSteps.class)
-    public ResponseEntity<ErrorMessages> userDuplicate(DuplicatesExceptionSteps ex) {
+    @ExceptionHandler(DuplicatesOccursExceptionSteps.class)
+    public ResponseEntity<ErrorMessages> userDuplicate(DuplicatesOccursExceptionSteps ex) {
 
         ErrorMessages errorMessages = ErrorMessages.builder()
                 .messages(ex.getMessage())
                 .status("DUPLICATE")
+                .build();
+
+        return new ResponseEntity<ErrorMessages>(errorMessages, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(DetailsNotFoundExceptionSteps.class)
+    public ResponseEntity<ErrorMessages> detailsNotFound(DetailsNotFoundExceptionSteps ex) {
+
+        ErrorMessages errorMessages = ErrorMessages.builder()
+                .messages(ex.getMessage())
+                .status("NOT FOUND")
                 .build();
 
         return new ResponseEntity<ErrorMessages>(errorMessages, HttpStatus.NOT_ACCEPTABLE);

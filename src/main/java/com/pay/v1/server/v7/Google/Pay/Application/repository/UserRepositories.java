@@ -19,4 +19,6 @@ public interface UserRepositories extends JpaRepository<UserInformation, String>
 
     @Query("SELECT u FROM UserInformation u WHERE u.firstName =:firstName")
     UserInformation findByFirstName(String firstName);
+
+    Optional<UserInformation> findByPhoneNumber(String phoneNumber);
 }

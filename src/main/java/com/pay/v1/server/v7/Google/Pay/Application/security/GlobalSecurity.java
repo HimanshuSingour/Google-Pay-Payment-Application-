@@ -21,7 +21,7 @@ public class GlobalSecurity {
         http
                 .csrf()
                 .disable().authorizeHttpRequests()
-                .requestMatchers("/server/v4/register-user")
+                .requestMatchers("/server/v4/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
