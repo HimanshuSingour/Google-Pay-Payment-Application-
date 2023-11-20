@@ -17,5 +17,4 @@ public class UserConstants {
     public static final String USER_LOGIN_INFO = "You can log in using your first name as username and the provided password.";
 
 
-
 }

@@ -1,4 +1,4 @@
-package com.pay.v1.server.v7.Google.Pay.Application.dtos;
+package com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegister;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

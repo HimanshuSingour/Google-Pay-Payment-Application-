@@ -1,4 +1,4 @@
-package com.pay.v1.server.v7.Google.Pay.Application.dtos;
+package com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegister;
 
 import com.pay.v1.server.v7.Google.Pay.Application.validations.EmailValueAnnotation;
 import com.pay.v1.server.v7.Google.Pay.Application.validations.NumericValueAnnotation;

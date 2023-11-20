@@ -2,11 +2,10 @@ package com.pay.v1.server.v7.Google.Pay.Application.controller;
 
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailRequest;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailResponse;
-import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationRequest;
-import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationResponse;
+import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegister.UserRegistrationRequest;
+import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegister.UserRegistrationResponse;
 import com.pay.v1.server.v7.Google.Pay.Application.service.UserService;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

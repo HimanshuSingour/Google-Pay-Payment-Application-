@@ -2,8 +2,8 @@ package com.pay.v1.server.v7.Google.Pay.Application.serviceImpl;
 
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailRequest;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailResponse;
-import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationRequest;
-import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationResponse;
+import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegister.UserRegistrationRequest;
+import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegister.UserRegistrationResponse;
 import com.pay.v1.server.v7.Google.Pay.Application.entity.UserInformation;
 import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DetailsNotFoundExceptionSteps;
 import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DuplicatesOccursExceptionSteps;
