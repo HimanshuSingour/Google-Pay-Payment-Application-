@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.pay.v1.server.v7.Google.Pay.Application.constant.DuplicatesConstants.DUPLICATE_EMAIL_EXIST;
-import static com.pay.v1.server.v7.Google.Pay.Application.constant.DuplicatesConstants.DUPLICATE_PHONE_NUMBER_EXIST;
 import static com.pay.v1.server.v7.Google.Pay.Application.constant.UserConstants.*;
 
 @Service
