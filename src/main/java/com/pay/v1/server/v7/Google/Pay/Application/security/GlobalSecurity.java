@@ -22,7 +22,7 @@ public class GlobalSecurity {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("pay/v4/account/register")
+                .requestMatchers("http://192.168.1.15:7070/pay/v4/account/register")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
