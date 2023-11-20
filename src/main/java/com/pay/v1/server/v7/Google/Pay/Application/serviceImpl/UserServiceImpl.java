@@ -39,13 +39,11 @@ public class UserServiceImpl implements UserService {
             throw new UserServiceExceptionSteps(ALL_FIELD_REQUIRED);
         }
 
-        Optional<UserInformation> existSameEmail = userRepositories.existByEmail(userRegistrationRequest.getEmail());
-        Optional<UserInformation> existSamePhoneNumber = userRepositories.existByPhoneNumber(userRegistrationRequest.getPhoneNumber());
+        List<UserInformation> existSameEmail = userRepositories.existByEmail(userRegistrationRequest.getEmail());
+        List<UserInformation> existSamePhoneNumber = userRepositories.existByPhoneNumber(userRegistrationRequest.getPhoneNumber());
         {
-            if (existSameEmail.isPresent()) {
-                throw new DuplicatesExceptionSteps(DUPLICATE_EMAIL_EXIST);
-            } else if (existSamePhoneNumber.isPresent()) {
-                throw new DuplicatesExceptionSteps(DUPLICATE_PHONE_NUMBER_EXIST);
+            if (!existSameEmail.isEmpty()) { throw new DuplicatesExceptionSteps(DUPLICATE_EMAIL_EXIST);
+            } else if (!existSamePhoneNumber.isEmpty()) { throw new DuplicatesExceptionSteps(DUPLICATE_PHONE_NUMBER_EXIST);
             }
         }
 

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("pay/v4/")
+@RequestMapping("pay/v4")
 public class RegistrationController {
 
     @Autowired
