@@ -28,7 +28,7 @@ public class CustomsUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userInformation.getEmail();
+        return userInformation.getFirstName();
     }
 
     @Override

@@ -20,8 +20,8 @@ public class CustomsUserDetailsServiceImpl implements UserDetailsService {
     private UserRepositories userRepositories;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<UserInformation> userInformation = userRepositories.findByEmail(email);
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        Optional<UserInformation> userInformation = userRepositories.findByFirstName(name);
         if (userInformation.isPresent()) {
             return new CustomsUserDetails(userInformation.get());
         }
