@@ -10,6 +10,6 @@ public class NumericValueAnnotationLogic implements ConstraintValidator<NumericV
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return Objects.equals(value, ".*[a-zA-Z].*");
+        return value.matches("[0-9]+");
     }
 }

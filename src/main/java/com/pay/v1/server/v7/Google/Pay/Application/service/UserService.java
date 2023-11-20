@@ -7,5 +7,4 @@ public interface UserService {
 
     UserRegistrationResponse userRegistration(UserRegistrationRequest userRegistrationRequest);
 
-
 }
