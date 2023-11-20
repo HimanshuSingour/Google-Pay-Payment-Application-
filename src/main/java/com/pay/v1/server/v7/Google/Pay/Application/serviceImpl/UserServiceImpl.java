@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
                 .message(SUCCESSFULLY_REGISTERED)
                 .userId(userInformation.getUserId())
                 .status(SUCCESS_ONE)
+                .age(userInformation.getAge())
                 .city(userInformation.getCity())
                 .email(userInformation.getEmail())
                 .country(userInformation.getCountry())
