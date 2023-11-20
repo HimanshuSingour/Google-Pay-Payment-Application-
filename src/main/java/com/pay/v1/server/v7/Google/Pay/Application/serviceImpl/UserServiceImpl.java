@@ -3,6 +3,7 @@ package com.pay.v1.server.v7.Google.Pay.Application.serviceImpl;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationRequest;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegistrationResponse;
 import com.pay.v1.server.v7.Google.Pay.Application.entity.UserInformation;
+import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DuplicatesExceptionSteps;
 import com.pay.v1.server.v7.Google.Pay.Application.exceptions.UserServiceExceptionSteps;
 import com.pay.v1.server.v7.Google.Pay.Application.repository.UserRepositories;
 import com.pay.v1.server.v7.Google.Pay.Application.service.UserService;
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+import static com.pay.v1.server.v7.Google.Pay.Application.constant.DuplicatesConstants.DUPLICATE_EMAIL_EXIST;
+import static com.pay.v1.server.v7.Google.Pay.Application.constant.DuplicatesConstants.DUPLICATE_PHONE_NUMBER_EXIST;
 import static com.pay.v1.server.v7.Google.Pay.Application.constant.UserConstants.*;
 
 @Service
@@ -33,6 +37,16 @@ public class UserServiceImpl implements UserService {
 
         if (requiredFields.stream().anyMatch(String::isBlank)) {
             throw new UserServiceExceptionSteps(ALL_FIELD_REQUIRED);
+        }
+
+        Optional<UserInformation> existSameEmail = userRepositories.existByEmail(userRegistrationRequest.getEmail());
+        Optional<UserInformation> existSamePhoneNumber = userRepositories.existByPhoneNumber(userRegistrationRequest.getPhoneNumber());
+        {
+            if (existSameEmail.isPresent()) {
+                throw new DuplicatesExceptionSteps(DUPLICATE_EMAIL_EXIST);
+            } else if (existSamePhoneNumber.isPresent()) {
+                throw new DuplicatesExceptionSteps(DUPLICATE_PHONE_NUMBER_EXIST);
+            }
         }
 
         UserInformation userInformation = UserInformation.builder()
