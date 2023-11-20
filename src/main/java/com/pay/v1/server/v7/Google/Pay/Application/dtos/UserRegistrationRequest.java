@@ -26,7 +26,7 @@ public class UserRegistrationRequest {
     private String country;
     private String password;
 
-    @NumericValueAnnotation(message = "This field should have only numeric value")
+    @NumericValueAnnotation(message = "This field should have only numeric values")
     private String age;
     private String email;
     private String phoneNumber;
