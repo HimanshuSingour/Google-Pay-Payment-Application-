@@ -1,0 +1,11 @@
+{
+  "firstName": "Himanshu",
+  "lastName": "Singoura",
+  "email": "example@example.com",
+  "age": 25,
+  "password": "your_password_here",
+  "city": "Your City",
+  "country": "Your Country",
+  "phoneNumber": "+1234567890",
+  "address": "Your Address"
+}
