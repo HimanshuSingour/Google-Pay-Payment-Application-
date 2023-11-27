@@ -1,5 +1,8 @@
 package com.pay.v1.server.v7.Google.Pay.Application.serviceImpl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pay.v1.server.v7.Google.Pay.Application.dtos.JsonFile.ResponseForJson;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailRequest;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.LoginDetail.LoginDetailResponse;
 import com.pay.v1.server.v7.Google.Pay.Application.dtos.UserRegister.UserRegistrationRequest;
@@ -13,7 +16,10 @@ import com.pay.v1.server.v7.Google.Pay.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.pay.v1.server.v7.Google.Pay.Application.constant.UserConstants.*;
 
@@ -104,4 +110,29 @@ public class UserServiceImpl implements UserService {
 
         return detailRequest;
     }
+
+    @Override
+    public List<ResponseForJson> readDatFromJson(String userId) {
+
+        String JSON_FILE = "/Users/himanshu/Desktop/Google-Pay-Payment-Application-/src/main/resources/sample.json";
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        List<ResponseForJson> responseList = null;
+
+        try {
+//            File file = new File(JSON_FILE); Incensed use inputStream
+            InputStream inputStream = new FileInputStream(JSON_FILE);
+            ResponseForJson[] responseArray = objectMapper.readValue(inputStream, ResponseForJson[].class);
+
+            responseList = Arrays.asList(responseArray);
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+       return responseList.stream().filter(data -> data.getUserId().equals(userId)).collect(Collectors.toList());
+
+    }
+
 }
