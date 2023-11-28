@@ -11,10 +11,16 @@ import java.util.List;
 
 public interface UserService {
 
+    // Testing
+
+    List<ResponseForJson> readDatFromJson(String userId) throws JsonProcessingException;
+
+
+    // TODO: Users Process
+
     UserRegistrationResponse userRegistration(UserRegistrationRequest userRegistrationRequest);
 
     LoginDetailResponse getYourLoginDetails(LoginDetailRequest loginDetailRequest);
 
-    List<ResponseForJson> readDatFromJson(String userId) throws JsonProcessingException;
 
 }

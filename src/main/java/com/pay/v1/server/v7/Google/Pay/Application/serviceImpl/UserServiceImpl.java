@@ -115,16 +115,13 @@ public class UserServiceImpl implements UserService {
     public List<ResponseForJson> readDatFromJson(String userId) {
 
         String JSON_FILE = "/Users/himanshu/Desktop/Google-Pay-Payment-Application-/src/main/resources/sample.json";
-
         ObjectMapper objectMapper = new ObjectMapper();
-
         List<ResponseForJson> responseList = null;
 
         try {
 //            File file = new File(JSON_FILE); Incensed use inputStream
             InputStream inputStream = new FileInputStream(JSON_FILE);
             ResponseForJson[] responseArray = objectMapper.readValue(inputStream, ResponseForJson[].class);
-
             responseList = Arrays.asList(responseArray);
 
         } catch (IOException e) {
