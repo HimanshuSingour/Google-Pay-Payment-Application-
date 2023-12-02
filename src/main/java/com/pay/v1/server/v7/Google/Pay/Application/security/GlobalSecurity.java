@@ -23,6 +23,8 @@ public class GlobalSecurity {
                 .disable().authorizeHttpRequests()
                 .requestMatchers("/server/v4/**")
                 .permitAll()
+                .requestMatchers("/spec/v1/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

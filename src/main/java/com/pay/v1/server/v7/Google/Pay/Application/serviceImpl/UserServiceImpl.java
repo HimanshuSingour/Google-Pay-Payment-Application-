@@ -13,7 +13,9 @@ import com.pay.v1.server.v7.Google.Pay.Application.exceptions.DuplicatesOccursEx
 import com.pay.v1.server.v7.Google.Pay.Application.exceptions.UserServiceExceptionSteps;
 import com.pay.v1.server.v7.Google.Pay.Application.repository.UserRepositories;
 import com.pay.v1.server.v7.Google.Pay.Application.service.UserService;
+import com.pay.v1.server.v7.Google.Pay.Application.specifications.UserSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -128,7 +130,16 @@ public class UserServiceImpl implements UserService {
             System.out.println(e);
         }
 
-       return responseList.stream().filter(data -> data.getUserId().equals(userId)).collect(Collectors.toList());
+        return responseList.stream().filter(data -> data.getUserId().equals(userId)).collect(Collectors.toList());
+
+    }
+
+    // criteria api
+    public List<UserInformation> searchWithCriteria(String firstname) {
+        Specification<UserInformation> specification =
+                Specification.where(UserSpecifications.withName(firstname));
+
+        return userRepositories.findAll();
 
     }
 
